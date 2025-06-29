@@ -1,13 +1,17 @@
 #include "cli.h"
 #include "backup_engine.h"
+#include <iostream>
 
 int main(int argc, char* argv[]){
-    cli app;
-    Output out = app.parse_args(argc,argv);
-
+    (void) argc;
     BackupEngine engine;
-    engine.log(HALT, "this should halt!");
+    State state;
 
-    app.run(out);
+    engine.scan(argv[1], state);
+
+    for(auto& file : state.files){
+        std::cout << file << std::endl;
+    }
+
     return 0;
 }

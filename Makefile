@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -Wall -Wextra -Iinclude -O2
+CXXFLAGS := -Wall -std=c++2a -Wextra -Iinclude -O2
 
 TARGET := app
 SRC := $(wildcard src/*.cpp)

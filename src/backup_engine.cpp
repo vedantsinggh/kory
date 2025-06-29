@@ -1,12 +1,17 @@
 #include "backup_engine.h"
 
-int BackupEngine::scan(const std::string& source){
-    (void)source;
+int BackupEngine::scan(const std::string& source, State& state){
+    for (const auto& entry : std::filesystem::directory_iterator(source)){
+        if(std::filesystem::is_directory(entry)){
+            scan(entry.path(), state);
+        }else{
+            state.files.push_back(entry.path());
+        }
+    }
     return 0;
 }
 
 int BackupEngine::log(const LogType& type, const std::string& statement){
-    (void) statement;
     auto time_now = std::chrono::system_clock::now();
     auto to_time_t = std::chrono::system_clock::to_time_t(time_now);
     
