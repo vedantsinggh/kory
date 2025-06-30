@@ -8,13 +8,10 @@ int show_help(const State& state){
 }
 
 int main(int argc, char* argv[]){
-    (void) argc;
-    BackupEngine engine;
-
     cli tool;
-    tool.add_arguments("help", *show_help);
-    
     State state;
+
+    tool.add_arguments("help", *show_help);
     tool.run(state, argc, argv);
 
     return 0;

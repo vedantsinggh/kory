@@ -1,12 +1,16 @@
 #include "backup_engine.h"
 
 int BackupEngine::scan(const std::string& source, State& state){
-    for (const auto& entry : std::filesystem::directory_iterator(source)){
-        if(std::filesystem::is_directory(entry)){
-            scan(entry.path(), state);
-        }else{
-            state.files.push_back(entry.path());
+    try{
+        for (const auto& entry : std::filesystem::directory_iterator(source)){
+            if(std::filesystem::is_directory(entry)){
+                scan(entry.path(), state);
+            }else{
+                state.files.push_back(entry.path());
+            }
         }
+    } catch (const std::filesystem::filesystem_error& e){
+        log(WARN, "Access denied or error: " + std::string(e.what()));
     }
     return 0;
 }
