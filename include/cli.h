@@ -2,16 +2,17 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
+#include "backup_engine.h"
 
-struct Output {
-    bool show_help = false;
+struct Command {
     std::string name;
+    int (*run)(const State& state);
 };
 
 class cli {
     public:
-        Output parse_args(int argc, char* argv[]);
-        void run(const Output& out);
-    private:
-        void show_help() const;
+        std::vector<Command> commands;
+        void add_arguments(const std::string name, int (*func)(const State& state));
+        void run(const State& state, int argc, char* argv[]);
 };
