@@ -3,9 +3,10 @@
 #include <chrono>
 #include <iostream>
 #include <iomanip>
-#include <cassert>
 #include <filesystem>
 #include <vector>
+#include <fstream>
+#include "sha256.h"
 
 enum LogType {
     INFO,
@@ -27,6 +28,9 @@ struct State {
 
 class BackupEngine {
     public:
+        int init();
         int scan(const std::string& source, State& state);
         int log(const LogType& type, const std::string& statement);
+    private:
+        std::string config_file;
 };

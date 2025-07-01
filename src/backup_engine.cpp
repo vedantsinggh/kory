@@ -1,5 +1,22 @@
 #include "backup_engine.h"
 
+int BackupEngine::init(){
+    if (!std::filesystem::exists("./kor.bak")){
+        log(INFO, "Intializing Kor directory for backup!");
+        std::ofstream file;
+        try {
+            file.open("./kor.bak");
+            log(INFO, "Created kor.bak");
+        }catch (...) {
+            log(HALT, "Unable to create backup config file!");
+        }
+        return 0;
+    }else {
+        log(INFO, "Reinitlised kor backup folder!");
+        return 0;
+    }
+}
+
 int BackupEngine::scan(const std::string& source, State& state){
     try{
         for (const auto& entry : std::filesystem::directory_iterator(source)){
