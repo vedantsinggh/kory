@@ -25,7 +25,7 @@ bool JsonValue::as_bool() const { return std::get<bool>(_value); }
 double JsonValue::as_number() const { return std::get<double>(_value); }
 const std::string& JsonValue::as_string() const { return std::get<std::string>(_value); }
 const JsonObject& JsonValue::as_object() const { return _object; }
-const JsonArray& JsonValue::as_array() const { return _array; }
+ JsonArray& JsonValue::as_array()  { return _array; }
 
 namespace {
     class Parser {

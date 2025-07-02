@@ -32,7 +32,7 @@ public:
     double as_number() const;
     const std::string& as_string() const;
     const JsonObject& as_object() const;
-    const JsonArray& as_array() const;
+    JsonArray& as_array();
 
     static std::shared_ptr<JsonValue> parse(const std::string& text);
 
