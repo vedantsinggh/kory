@@ -3,3 +3,6 @@ app
 *.o
 test/
 build/
+.vscode/
+test.json
+
